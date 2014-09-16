@@ -1,0 +1,9 @@
+{
+  "name": "ember-imdb",
+  "description": "An app that serves data to Ember-Data",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "4.x"
+  }
+}
