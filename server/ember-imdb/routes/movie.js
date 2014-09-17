@@ -1,11 +1,25 @@
 /* GET users listing. */
 exports.list = function(req, res){
-  res.send({movies:[{title: "A", rating: 5, actors:[1], director: 1}, 
-  	{title: "B", rating: 8, actors:[2], director: 1}, 
-  	{title: "C", rating: 10, actors:[1], director: 1}]});
+  res.send({movies:[
+  	{id: 1, title: "A", rating: 2, 
+  		actors:[{firstName: "A", lastName: "B"}], 
+  		director: {firstName: "A", lastName: "B"},
+  		releaseDate: new Date(2014, 7, 14)}, 
+  	{id: 2, title: "B", rating: 4, 
+  		actors:[{firstName: "B", lastName: "C"}], 
+  		director: {firstName: "A", lastName: "C"},
+  		releaseDate: new Date(2014, 8, 18)}, 
+  	{id: 3, title: "C", rating: 5, 
+  		actors:[{firstName: "A", lastName: "D"}], 
+  		director: {firstName: "A", lastName: "X"},
+  		releaseDate: new Date(2014, 7, 18)}
+  	]});
 };
 
 exports.get = function(req, res){
 	var actorId = req.params.actor_id;
-	res.send({movie:{title: "A", rating: 5, actors:[]}});
+	res.send({movie:{id: 2, title: "B", rating: 4, 
+  		actors:[{firstName: "B", lastName: "C"}], 
+  		director: {firstName: "A", lastName: "C"},
+  		releaseDate: new Date(2014, 8, 18)}});
 };
