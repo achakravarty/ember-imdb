@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">	
 </head>
 <body>
-	<div class="container">
+	<!-- <div class="container">
 		<div class="navbar navbar-inverse">
 
 			<div class="navbar-header">
@@ -58,10 +58,91 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
+	<script type="text/x-handlebars">
+		<div class="container">
+			<div class="navbar navbar-inverse">
 
-	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	<script src="scripts/app.js"></script>
-</body>
-</html>
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#imdb-collapsed">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Ember-IMDB</a>
+				</div>
+				<div class="collapse navbar-collapse" id="imdb-collapsed">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">Movies</a></li>
+					</ul>
+				</div>
+			</div>
+			{{outlet}}
+		</div>
+	</script>
+	<script type="text/x-handlebars" id="index">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Coming Soon</h3>
+					</div>
+					<div class="panel-body">
+						{{#each movie in comingSoonMovies}}
+						<div class="col-md-4">
+							<div class="text-center">
+								{{#link-to 'book' book}}
+								<img {{bind-attr src=movie.image}} style="height:300px;width:200px"></img>
+								<h4> {{movie.title}} <small class="text-info">({{movie.releaseYear}})</small></h4>
+								{{/link-to}}
+							</div>
+						</div>
+						{{/each}}
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="panel panel-success">					
+					<div class="panel-heading">
+						<h3 class="panel-title">Trending</h3>
+					</div>
+					<div class="panel-body">
+						<div class="list-group">
+							{{#each movie in trendingMovies}}
+							<a class="list-group-item">{{movie.title}}</a>
+							{{/each}}
+						</div>
+					</div>					
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<h3 class="panel-title">Top Movies</h3>
+					</div>
+					<div class="panel-body">
+						{{#each movie in topMovies}}
+						<div class="col-md-2">
+							<div class="text-center">
+								<img {{bind-attr src=movie.image}} style="height:200px;width:150px"></img>
+								<h4>{{movie.title}}
+									<small class="text-info">({{movie.releaseYear}})</small>
+									</h4>
+								</div>
+							</div>
+						</div>
+						{{/each}}
+					</div>
+				</div>
+			</div>
+		</script>
+		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script src="http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-1.0.0.js"></script>
+		<script src="http://builds.emberjs.com/release/ember.min.js"></script>	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script src="scripts/app.js"></script>
+	</body>
+	</html>
