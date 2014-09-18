@@ -114,7 +114,7 @@
 						<strong class="text-muted">Director: </strong>{{model.director.fullName}}
 					</div>
 					<div class="btn-group" style="margin-top:20px">
-						{{#if isInWatchList}}
+						{{#if model.isInWatchList}}
 						<button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span></button>
 						<button class="btn btn-deafult" {{action 'removeFromWatchList'}}>Watchlist</button>
 						{{else}}

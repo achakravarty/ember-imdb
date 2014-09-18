@@ -85,11 +85,11 @@ App.MovieRoute = Ember.Route.extend({
 	},
 	actions:{
 		addToWatchList: function(movie){
-			this.controller.set('isInWatchList', true);
+			this.controller.set('model.isInWatchList', true);
 			this.controller.get('watchlist').send('addToWatchlist', this.currentModel);
 		},
 		removeFromWatchList: function(movie){
-			this.controller.set('isInWatchList', false);
+			this.controller.set('model.isInWatchList', false);
 			this.controller.get('watchlist').send('removeFromWatchlist', this.currentModel);
 		}
 	}
@@ -97,8 +97,7 @@ App.MovieRoute = Ember.Route.extend({
 
 App.MovieController = Ember.ObjectController.extend({
 	needs: 'watchlist',
-	watchlist: Ember.computed.alias('controllers.watchlist'),
-	isInWatchList: false
+	watchlist: Ember.computed.alias('controllers.watchlist')
 });
 
 App.ActorRoute = Ember.Route.extend({
