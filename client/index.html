@@ -87,11 +87,11 @@
 							</div>
 							{{/link-to}}
 						</div>
+						{{/each}}
 					</div>
-					{{/each}}
 				</div>
 			</div>
-		</div>
+		</div>	
 	</script>
 	<script type="text/x-handlebars" id="movie">
 		<div class="panel panel-info">
@@ -125,28 +125,67 @@
 						<div class="panel-body">
 							<div class="media">
 								{{#each actor in model.actors}}
-								<a class="pull-left">
-									<img class="media-object" src="http://placehold.it/50x50">
-								</a>
+								{{#link-to 'actor' actor class="pull-left"}}
+								<img class="media-object" src="http://placehold.it/50x50"/>
+								{{/link-to}}
 								<div class="media-body">
+									{{#link-to 'actor' actor}}
 									<div class="media-heading">
-										<a> 
-											<h4>{{actor.fullName}}</h4>
-										</br>				
-									</a>
-								</div>
+										<h4>{{actor.fullName}}</h4>
+									</div>									
+									{{/link-to}}
+								</div>								
 								{{/each}}
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>	
+				</div>	
+			</div>
 		</div>
 	</script>
-	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script src="http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-1.0.0.js"></script>
-	<script src="http://builds.emberjs.com/release/ember.min.js"></script>	
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	<script src="scripts/app.js"></script>
+	<script type="text/x-handlebars" id="actor">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h4 class="panel-title">Actor</h4>
+			</div>
+			<div class="panel-body">
+				<div class="col-md-3">
+					<img {{bind-attr src=actor.image}} style="height:300px;width:200px"/>
+				</div>
+				<div class="col-md-9">
+					<h2 class="page-header">{{model.fullName}}						
+					</h2>
+					<div>{{model.bio}}
+					</div>					
+				</div>				
+			</div>
+		</div>
+		<div class="panel panel-danger">
+			<div class="panel-heading">
+				<h4 class="panel-title">Movies by {{model.fullName}}</h4>
+			</div>
+			<div class="panel-body">
+				{{#each movie in model.movies}}
+				<div class="col-md-2">
+					{{#link-to 'movie' movie}}
+					<div class="text-center">
+						<img {{bind-attr src=movie.image}} style="height:200px;width:150px"></img>
+						<h4>{{movie.title}}
+							<small class="text-info">({{movie.releaseYear}})</small>
+						</h4>
+						{{stars movie.rating}}
+					</div>
+					{{/link-to}}
+				</div>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+</script>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-1.0.0.js"></script>
+<script src="http://builds.emberjs.com/release/ember.min.js"></script>	
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="scripts/app.js"></script>
 </body>
 </html>

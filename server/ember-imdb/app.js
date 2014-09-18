@@ -25,12 +25,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
-//app.get('/', routes.index);
 app.get('/movies', movies.list);
 app.get('/movies/:movie_id', movies.get);
 app.get('/actors', actors.get);
 app.get('/actors/:actor_id', actors.get);
-app.get('/directors/:id', directors.get);
+app.get('/directors/:director_id', directors.get);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

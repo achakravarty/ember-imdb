@@ -2,6 +2,7 @@ App = Ember.Application.create();
 
 App.Router.map(function() {
 	this.resource("movie", { path: "/movie/:movie_id" });
+	this.resource("actor", { path: "/actor/:actor_id" });
 });
 
 App.Movie = Ember.Object.extend({
@@ -18,20 +19,22 @@ App.Movie = Ember.Object.extend({
 	trailer: ''
 });
 
-App.Actor = Ember.Object.extend({
+App.Person = Ember.Object.extend({
 	firstName: '',
 	lastName: '',
+	bio: '',
+	image: '',
 	fullName: function(){
 		return this.get('firstName') + " " + this.get('lastName');
 	}.property('firstName', 'lastName')
 });
 
-App.Director = Ember.Object.extend({
-	firstName: '',
-	lastName: '',
-	fullName: function(){
-		return this.get('firstName') + " " + this.get('lastName');
-	}.property('firstName', 'lastName')
+App.Actor = App.Person.extend({
+	
+});
+
+App.Director = App.Person.extend({
+	
 });
 
 App.IndexRoute = Ember.Route.extend({
@@ -72,8 +75,22 @@ App.IndexController = Ember.ArrayController.extend({
 
 App.MovieRoute = Ember.Route.extend({
 	model: function(params){
-		return Ember.$.getJSON('http://localhost:3000/movies/' + params.movie_id).then(function(response){
-			return translators.movieTranslator(response.movie);
+		return App.Movie.create({id: params.movie.id});
+	},
+	setupController: function(controller, movie){
+		Ember.$.getJSON('http://localhost:3000/movies/' + movie.get('id')).then(function(response){
+			controller.set('model', translators.movieTranslator(response.movie))
+		});
+	}
+});
+
+App.ActorRoute = Ember.Route.extend({
+	model: function(params){
+		return App.Actor.create({id: params.actor.id});
+	},
+	setupController: function(controller, actor){
+		Ember.$.getJSON('http://localhost:3000/actors/' + actor.get('id')).then(function(response){
+			controller.set('model', translators.actorTranslator(response.actor))
 		});
 	}
 });
@@ -108,20 +125,38 @@ var translators = {
 			var act = that.actorTranslator(actor);
 			movie.get('actors').pushObject(act);
 		});
+		
 		return movie;
 	},
 	actorTranslator : function(responseActor){
 		var actor = App.Actor.create({
+			id: responseActor.id,
 			firstName: responseActor.firstName,
-			lastName: responseActor.lastName
+			lastName: responseActor.lastName,
+			bio: responseActor.bio,
+			image: responseActor.image
 		});	
+
+		var movies = [];
+		$.each(responseActor.movies, function(index, movie){
+			movies.push(translators.movieTranslator(movie));
+		});
+		actor.set('movies', Ember.A(movies));
 		return actor;
 	},
 	directorTranslator : function(responseDirector){
 		var director = App.Director.create({
+			id: responseDirector.id,
 			firstName: responseDirector.firstName,
-			lastName: responseDirector.lastName
-		});		
+			lastName: responseDirector.lastName,
+			bio: responseDirector.bio,
+			image: responseDirector.image
+		});	
+		var movies = [];
+		$.each(responseDirector.movies, function(index, movie){
+			movies.push(translators.movieTranslator(movie));
+		});
+		director.set('movies', Ember.A(movies));	
 		return director;
 	}
 };
