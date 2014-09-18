@@ -1,7 +1,7 @@
 App = Ember.Application.create();
 
 App.Router.map(function() {
-  this.resource("movie", { path: "/movie/:movie_id" });
+	this.resource("movie", { path: "/movie/:movie_id" });
 });
 
 App.Movie = Ember.Object.extend({
@@ -76,7 +76,15 @@ App.MovieRoute = Ember.Route.extend({
 			return translators.movieTranslator(response.movie);
 		});
 	}
-})
+});
+
+Ember.Handlebars.registerBoundHelper('stars', function(value, options) {
+	var stars = $("<div/>");	
+	for (var i = 0; i < value; i++) {
+		$(stars).append('<small class="glyphicon glyphicon-star text-primary"></small>');
+	};
+	return new Handlebars.SafeString(stars.html());
+});
 
 var translators = {
 	movieTranslator : function(responseMovie){
