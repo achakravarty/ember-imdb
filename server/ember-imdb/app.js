@@ -10,6 +10,7 @@ var routes = require('./routes');
 var movies = require('./routes/movie');
 var actors = require('./routes/actor');
 var directors = require('./routes/director');
+var watchlist = require('./routes/watchlist');
 
 var app = express();
 
@@ -30,6 +31,9 @@ app.get('/movies/:movie_id', movies.get);
 app.get('/actors', actors.get);
 app.get('/actors/:actor_id', actors.get);
 app.get('/directors/:director_id', directors.get);
+app.get('/watchlist', watchlist.list);
+app.post('/watchlist/add', watchlist.add);
+app.post('/watchlist/delete', watchlist.remove);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

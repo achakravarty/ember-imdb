@@ -8,7 +8,7 @@ exports.get = function(req, res){
 	res.send({movie:movieFixtures[movieId - 1]});
 };
 
-var movieFixtures = [
+movieFixtures = [
 {
 	id: 1, title: "A", rating: 2, releaseDate: new Date(2014, 7, 14), summary: "", image: "", trailer: "",
   		actors:[{id: 1, firstName: "A", lastName: "B", movies:[]}], 

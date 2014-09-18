@@ -23,7 +23,8 @@
 				</div>
 				<div class="collapse navbar-collapse" id="imdb-collapsed">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Movies</a></li>
+						<li class="active">{{#link-to 'index'}}Movies{{/link-to}}</li>
+						<li>{{#link-to 'watchlist'}}Watchlist{{/link-to}}</li>
 					</ul>
 				</div>
 			</div>
@@ -113,8 +114,13 @@
 						<strong class="text-muted">Director: </strong>{{model.director.fullName}}
 					</div>
 					<div class="btn-group" style="margin-top:20px">
+						{{#if isInWatchList}}
+						<button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span></button>
+						<button class="btn btn-deafult" {{action 'removeFromWatchList'}}>Watchlist</button>
+						{{else}}
 						<button class="btn btn-warning"><span class="glyphicon glyphicon-plus"></span></button>
-						<button class="btn btn-warning">Watchlist</button>
+						<button class="btn btn-warning" {{action 'addToWatchList'}}>Watchlist</button>
+						{{/if}}
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -180,12 +186,18 @@
 				{{/each}}
 			</div>
 		</div>
-	</div>
-</script>
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-1.0.0.js"></script>
-<script src="http://builds.emberjs.com/release/ember.min.js"></script>	
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="scripts/app.js"></script>
+	</script>
+	<script type="text/x-handlebars" id="watchlist">
+	<ul>
+	{{#each movie in model}}
+	<li>{{movie.title}}</li>
+	{{/each}}
+	</ul>
+	</script>
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-1.0.0.js"></script>
+	<script src="http://builds.emberjs.com/release/ember.min.js"></script>	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="scripts/app.js"></script>
 </body>
 </html>
