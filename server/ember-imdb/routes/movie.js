@@ -11,17 +11,17 @@ exports.get = function(req, res){
 movieFixtures = [
 {
 	id: 1, title: "A", rating: 2, releaseDate: new Date(2014, 7, 14), summary: "", image: "", trailer: "",
-  		actors:[{id: 1, firstName: "A", lastName: "B", movies:[]}], 
-  		director: {id: 1, firstName: "A", lastName: "B", movies:[]}
+  		actors:[1], 
+  		director: 1
 },
 {
 	id: 2, title: "B", rating: 4, releaseDate: new Date(2014, 8, 20), summary: "", image: "", trailer: "",
-  		actors:[{id: 1, firstName: "A", lastName: "B", movies:[]}], 
-  		director: {id: 2, firstName: "B", lastName: "C", movies:[]}
+  		actors:[1], 
+  		director: 2
 },
 {
 	id: 3, title: "C", rating: 5, releaseDate: new Date(2014, 7, 18), summary: "", image: "", trailer: "",
-  		actors:[{id: 2, firstName: "B", lastName: "C", movies:[]}], 
-  		director: {id: 1, firstName: "A", lastName: "B", movies:[]}
+  		actors:[2], 
+  		director: 1
 }
 ];
