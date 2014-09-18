@@ -3,7 +3,6 @@ App = Ember.Application.create();
 App.Router.map(function() {
 	this.resource("movie", { path: "/movie/:movie_id" });
 	this.resource("actor", { path: "/actor/:actor_id" });
-	this.route("watchlist");
 });
 
 App.Movie = Ember.Object.extend({
@@ -85,19 +84,12 @@ App.MovieRoute = Ember.Route.extend({
 	},
 	actions:{
 		addToWatchList: function(movie){
-			this.controller.set('model.isInWatchList', true);
-			this.controller.get('watchlist').send('addToWatchlist', this.currentModel);
+			this.controller.set('model.isInWatchList', true);			
 		},
 		removeFromWatchList: function(movie){
-			this.controller.set('model.isInWatchList', false);
-			this.controller.get('watchlist').send('removeFromWatchlist', this.currentModel);
+			this.controller.set('model.isInWatchList', false);			
 		}
 	}
-});
-
-App.MovieController = Ember.ObjectController.extend({
-	needs: 'watchlist',
-	watchlist: Ember.computed.alias('controllers.watchlist')
 });
 
 App.ActorRoute = Ember.Route.extend({
@@ -119,19 +111,6 @@ App.WatchlistRoute = Ember.Route.extend({
 				movies.push(translators.movieTranslator(movie));
 			});
 			return Ember.A(movies);
-		});
-	}
-});
-
-App.WatchlistController = Ember.ArrayController.extend({
-	addToWatchlist: function(movie){
-		Ember.$.post('http://localhost:3000/watchlist/add', {'movie': JSON.stringify(movie)}).then(function(){
-			alert('saved');
-		});
-	},
-	removeFromWatchlist: function(movie){
-		Ember.$.post('http://localhost:3000/watchlist/delete', {'movie': JSON.stringify(movie)}).then(function(){
-			alert('saved');
 		});
 	}
 });
