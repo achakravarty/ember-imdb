@@ -8,7 +8,7 @@ exports.list = function(req, res){
   	{id: 2, title: "B", rating: 4, 
   		actors:[{firstName: "B", lastName: "C"}], 
   		director: {firstName: "A", lastName: "C"},
-  		releaseDate: new Date(2014, 8, 18)}, 
+  		releaseDate: new Date(2014, 8, 19)}, 
   	{id: 3, title: "C", rating: 5, 
   		actors:[{firstName: "A", lastName: "D"}], 
   		director: {firstName: "A", lastName: "X"},

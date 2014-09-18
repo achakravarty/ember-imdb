@@ -1,5 +1,9 @@
 App = Ember.Application.create();
 
+App.Router.map(function() {
+  this.resource("movie", { path: "/movie/:movie_id" });
+});
+
 App.Movie = Ember.Object.extend({
 	title: '',
 	summary: '',
@@ -16,12 +20,18 @@ App.Movie = Ember.Object.extend({
 
 App.Actor = Ember.Object.extend({
 	firstName: '',
-	lastName: ''
+	lastName: '',
+	fullName: function(){
+		return this.get('firstName') + " " + this.get('lastName');
+	}.property('firstName', 'lastName')
 });
 
 App.Director = Ember.Object.extend({
 	firstName: '',
-	lastName: ''
+	lastName: '',
+	fullName: function(){
+		return this.get('firstName') + " " + this.get('lastName');
+	}.property('firstName', 'lastName')
 });
 
 App.IndexRoute = Ember.Route.extend({
@@ -59,6 +69,14 @@ App.IndexController = Ember.ArrayController.extend({
 		});
 	}.property('@each.releaseDate', '@each.rating')
 });
+
+App.MovieRoute = Ember.Route.extend({
+	model: function(params){
+		return Ember.$.getJSON('http://localhost:3000/movies/' + params.movie_id).then(function(response){
+			return translators.movieTranslator(response.movie);
+		});
+	}
+})
 
 var translators = {
 	movieTranslator : function(responseMovie){
