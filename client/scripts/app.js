@@ -76,6 +76,14 @@ App.IndexController = Ember.ArrayController.extend({
 App.MovieRoute = Ember.Route.extend({
 	model: function(params){
 		return this.store.find('movie', params.movie_id);
+	},
+	actions:{
+		addToWatchList: function(movie){
+			this.controller.set('model.isInWatchList', true);			
+		},
+		removeFromWatchList: function(movie){
+			this.controller.set('model.isInWatchList', false);			
+		}
 	}
 });
 
