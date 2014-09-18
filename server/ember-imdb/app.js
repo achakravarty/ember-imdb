@@ -29,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
 app.get('/movies', movies.list);
+app.put('/movies/:movie_id', movies.update);
 app.get('/movies/:movie_id', movies.get);
 app.get('/actors', actors.get);
 app.get('/actors/:actor_id', actors.get);

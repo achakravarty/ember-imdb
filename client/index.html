@@ -102,6 +102,27 @@
 				<div class="col-md-3">
 					<img {{bind-attr src=model.image}} style="height:300px;width:200px"/>
 				</div>
+				{{#if isEditMode}}
+				<div class="col-md-5">
+					<div class="form">
+						<div class="form-group">
+							<label for="title">Title</label>
+							{{input class="form-control" id="title" placeholder="Movie Title" value=model.title}}
+						</div>
+						<div class="form-group">
+							<label for="release">Release Date</label>
+							{{view App.DateField type="date" class="form-control" id="release" placeholder="Movie Release Date" dateBinding="model.releaseDate"}}
+						</div>
+						<div class="form-group">
+							<label for="summary">Summary</label>
+							{{input class="form-control" id="summary" placeholder="Movie Summary" value=model.summary}}
+						</div>
+					</div>
+					<div style="margin-top:50px">
+						<button class="btn btn-primary" {{action 'done'}}>Done</button>
+					</div>
+				</div>
+				{{else}}
 				<div class="col-md-5">
 					<h2 class="page-header">{{model.title}}
 						<small class="text-muted">({{model.releaseYear}})</small>
@@ -121,7 +142,12 @@
 						<button class="btn btn-warning" {{action 'addToWatchList'}}>Watchlist</button>
 						{{/if}}
 					</div>
+
+					<div style="margin-top:50px">
+						<button class="btn btn-primary" {{action 'edit'}}>Edit</button>
+					</div>
 				</div>
+				{{/if}}
 				<div class="col-md-4">
 					<div class="panel panel-info"> 
 						<div class="panel-heading">
@@ -185,13 +211,6 @@
 				{{/each}}
 			</div>
 		</div>
-	</script>
-	<script type="text/x-handlebars" id="watchlist">
-	<ul>
-	{{#each movie in model}}
-	<li>{{movie.title}}</li>
-	{{/each}}
-	</ul>
 	</script>
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-1.0.0.js"></script>

@@ -5,6 +5,12 @@ exports.list = function(req, res){
 
 exports.get = function(req, res){
 	var movieId = req.params.movie_id;
+	movieFixtures[movieId - 1] = req.body.movie;
+	res.send({movie:movieFixtures[movieId - 1]});
+};
+
+exports.update = function(req, res){
+	var movieId = req.params.movie_id;
 	res.send({movie:movieFixtures[movieId - 1]});
 };
 

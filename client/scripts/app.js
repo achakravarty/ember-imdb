@@ -83,8 +83,20 @@ App.MovieRoute = Ember.Route.extend({
 		},
 		removeFromWatchList: function(movie){
 			this.controller.set('model.isInWatchList', false);			
+		},
+		edit: function(){
+			this.controller.set('isEditMode', true);
+		},
+		done: function(){
+			this.controller.set('isEditMode', false);
+			var movie = this.currentModel;
+			movie.save();
 		}
 	}
+});
+
+App.MovieController = Ember.ObjectController.extend({
+	isEditMode: false
 });
 
 App.ActorRoute = Ember.Route.extend({
@@ -99,4 +111,21 @@ Ember.Handlebars.registerBoundHelper('stars', function(value, options) {
 		$(stars).append('<small class="glyphicon glyphicon-star text-primary"></small>');
 	};
 	return new Handlebars.SafeString(stars.html());
+});
+
+App.DateField = Ember.TextField.extend({
+  type: 'date',
+  date: function(key, date) {
+    if (date) {
+      this.set('value', date.toISOString().substring(0, 10));
+    } else {
+      value = this.get('value');
+      if (value) {
+        date = new Date(value);
+      } else {
+        date = null;
+      }
+    }
+    return date;
+  }.property('value')
 });
