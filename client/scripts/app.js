@@ -3,11 +3,10 @@ App = Ember.Application.create();
 App.Router.map(function() {
 	this.resource("movie", { path: "/movie/:movie_id" });
 	this.resource("actor", { path: "/actor/:actor_id" });
-	this.route("watchlist");
 });
 
 DS.RESTAdapter.reopen({
-  host: 'http://localhost:3000'
+	host: 'http://localhost:3000'
 })
 
 var attr = DS.attr;
@@ -77,42 +76,12 @@ App.IndexController = Ember.ArrayController.extend({
 App.MovieRoute = Ember.Route.extend({
 	model: function(params){
 		return this.store.find('movie', params.movie_id);
-	},
-	actions:{
-		addToWatchList: function(movie){
-			this.controller.set('model.isInWatchList', true);
-			this.controller.get('watchlist').send('addToWatchlist', this.currentModel);
-		},
-		removeFromWatchList: function(movie){
-			this.controller.set('model.isInWatchList', false);
-			this.controller.get('watchlist').send('removeFromWatchlist', this.currentModel);
-		}
 	}
-});
-
-App.MovieController = Ember.ObjectController.extend({
-	needs: 'watchlist',
-	watchlist: Ember.computed.alias('controllers.watchlist')
 });
 
 App.ActorRoute = Ember.Route.extend({
 	model: function(params){
-		return this.store.find('movie', params.actor_id);
-	}
-});
-
-App.WatchlistRoute = Ember.Route.extend({
-	model: function(){
-		return this.store.find('watchlist');
-	}
-});
-
-App.WatchlistController = Ember.ArrayController.extend({
-	addToWatchlist: function(movie){
-		
-	},
-	removeFromWatchlist: function(movie){
-		
+		return this.store.find('actor', params.actor_id);
 	}
 });
 

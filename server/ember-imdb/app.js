@@ -1,5 +1,6 @@
 var express = require('express');
 var http = require('http');
+var cors = require('cors')
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
@@ -13,6 +14,7 @@ var directors = require('./routes/director');
 var watchlist = require('./routes/watchlist');
 
 var app = express();
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,9 +33,6 @@ app.get('/movies/:movie_id', movies.get);
 app.get('/actors', actors.get);
 app.get('/actors/:actor_id', actors.get);
 app.get('/directors/:director_id', directors.get);
-app.get('/watchlist', watchlist.list);
-app.post('/watchlist/add', watchlist.add);
-app.post('/watchlist/delete', watchlist.remove);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
@@ -52,7 +51,7 @@ if (app.get('env') === 'development') {
         //     message: err.message,
         //     error: err
         // });
-    });
+});
 }
 
 // production error handler
