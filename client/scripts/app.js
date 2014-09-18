@@ -81,14 +81,6 @@ App.MovieRoute = Ember.Route.extend({
 		Ember.$.getJSON('http://localhost:3000/movies/' + movie.get('id')).then(function(response){
 			controller.set('model', translators.movieTranslator(response.movie))
 		});		
-	},
-	actions:{
-		addToWatchList: function(movie){
-			this.controller.set('model.isInWatchList', true);			
-		},
-		removeFromWatchList: function(movie){
-			this.controller.set('model.isInWatchList', false);			
-		}
 	}
 });
 
