@@ -61,14 +61,14 @@ App.IndexController = Ember.ArrayController.extend({
 	trendingMovies: function(){
 		return this.filter(function(movie){
 			var today = new Date();
-			var twoMonthsAgo = new Date(today.getYear(), today.getMonth() - 2, today.getDate());
+			var twoMonthsAgo = new Date(today.getFullYear(), today.getMonth() - 2, today.getDate());
 			return new Date(movie.releaseDate) > twoMonthsAgo && new Date(movie.releaseDate) < today;
 			return new Date(movie.releaseDate) > new Date();
 		});
 	}.property('@each.releaseDate'),
 	topMovies: function(){
 		return this.filter(function(movie){
-			return movie.rating > 4 && new Date(movie.releaseDate) < new Date();
+			return movie.rating > 8 && new Date(movie.releaseDate) < new Date();
 		});
 	}.property('@each.releaseDate', '@each.rating')
 });
@@ -132,8 +132,7 @@ var translators = {
 			summary: responseMovie.summary,
 			releaseDate: responseMovie.releaseDate,
 			rating: responseMovie.rating,
-			//image: responseMovie.image,
-			image: "http://www.cinemark.com/media/19383200/big.jpg",			
+			image: responseMovie.image,
 			trailer: responseMovie.trailer
 		});
 

@@ -19,7 +19,10 @@ movieFixtures = [
 	bio: "Dylan O'Brien was born in New York City, to Lisa Rhodes, a former actress who also ran an acting school, and Patrick B. O'Brien, a camera operator",
 		movies:[]
 }], 
-  		director: 1
+  		director: {
+	id:1, firstName: "Wes", lastName: "Ball", image: "", bio: "",
+		movies:[]
+}
 },
 {
 	id: 2, title: "Teenage Mutant Ninja Turtles", rating: 6, releaseDate: new Date(2014, 7, 8), 
@@ -36,7 +39,10 @@ movieFixtures = [
 	bio: "A small-town guy with a big heart, William Fichtner has been captivating the hearts of Western New Yorkers for decades. Bill was born in 1956 on Long Island, New York, to Patricia A. (Steitz) and William E. Fichtner",
 		movies:[]
 }], 
-  		director: 2
+  		director: {
+	id:2, firstName: "Jonathan", lastName: "Liebesman", image: "", bio: "",
+		movies:[]
+}
 },
 {
 	id: 3, title: "The Dark Knight", rating: 9, releaseDate: new Date(2008, 6, 18), 
@@ -58,7 +64,10 @@ movieFixtures = [
 	bio: "When a hunky, twenty-year-old heart-throb Heath Ledger first came to the attention of the public in 1999, it was all too easy to tag him as a 'pretty boy' and an actor of little depth. He spent several years trying desperately to sway this image, but this was a double-edged sword.",
 		movies:[]
 }], 
-  		director: 3
+  		director: {
+	id:3, firstName: "Christopher", lastName: "Nolan", image: "", bio: "",
+		movies:[]
+}
 },
 {
 	id: 4, title: "The Shawshank Redemption", rating: 9, releaseDate: new Date(1994, 9, 14), 
@@ -70,7 +79,10 @@ movieFixtures = [
 	bio: "With an authoritative voice and calm demeanor, this ever popular American actor has grown into one of the most respected figures in modern US cinema. Morgan was born in June 1937 in Memphis, Tennessee, to Mayme Edna (Revere), a teacher, and Morgan Porterfield Freeman, a barber.",
 		movies:[]
 }], 
-  		director: 4
+  		director: {
+	id:4, firstName: "Frank", lastName: "Darabont", image: "", bio: "",
+		movies:[]
+}
 },
 {
 	id: 5, title: "Transformers", rating: 7, releaseDate: new Date(2007, 6, 3), 
@@ -82,7 +94,10 @@ movieFixtures = [
 	bio: "Megan Denise Fox was born in Rockwood, Tennessee, to Gloria Darlene (Cisson) and Franklin Thomas Fox, a parole officer. Megan began her training in drama and dance at age 5 and, at age 10, moved to St. Petersburg, Florida where she continued her training and finished school.",
 		movies:[]
 }], 
-  		director: 5
+  		director: {
+	id:5, firstName: "Michael", lastName: "Bay", image: "", bio: "",
+		movies:[]
+}
 },
 {
 	id: 6, title: "Transformers: Revenge of the Fallen", rating: 6, releaseDate: new Date(2009, 5, 24), 
@@ -94,7 +109,10 @@ movieFixtures = [
 	bio: "Megan Denise Fox was born in Rockwood, Tennessee, to Gloria Darlene (Cisson) and Franklin Thomas Fox, a parole officer. Megan began her training in drama and dance at age 5 and, at age 10, moved to St. Petersburg, Florida where she continued her training and finished school.",
 		movies:[]
 }], 
-  		director: 5
+  		director: {
+	id:5, firstName: "Michael", lastName: "Bay", image: "", bio: "",
+		movies:[]
+}
 },
 {
 	id: 7, title: "Guardians of the Galaxy", rating: 9, releaseDate: new Date(2014, 7, 1), 
@@ -106,7 +124,10 @@ movieFixtures = [
 	bio: "Vin Diesel was born in New York City. He was raised by his astrologer/psychologist mother, Delora Sherleen (Sinclair), and adoptive father, Irving H. Vincent, an acting instructor and theater manager, in an artist's housing project in New York's Greenwich Village.",
 		movies:[]
 }], 
-  		director: 6
+  		director: {
+	id:6, firstName: "James", lastName: "Gunn", image: "", bio: "",
+		movies:[]
+}
 },
 {
 	id: 8, title: "Dolphin Tale 2", rating: 7, releaseDate: new Date(2014, 8, 12), 
@@ -118,7 +139,10 @@ movieFixtures = [
 	bio: "With an authoritative voice and calm demeanor, this ever popular American actor has grown into one of the most respected figures in modern US cinema. Morgan was born in June 1937 in Memphis, Tennessee, to Mayme Edna (Revere), a teacher, and Morgan Porterfield Freeman, a barber.",
 		movies:[]
 }], 
-  		director: 7
+  		director: {
+	id:7, firstName: "Charles", lastName: "Martin Smith", image: "", bio: "",
+		movies:[]
+}
 },
 {
 	id: 9, title: "The Hunger Games: Mockingjay - Part 1", rating: 0, releaseDate: new Date(2014, 10, 21), 
@@ -130,7 +154,10 @@ movieFixtures = [
 	bio: "Academy Award-winning actress Jennifer Lawrence, best-known for playing Katniss Everdeen in The Hunger Games (2012), was born in Louisville, Kentucky on August 15, 1990, to Karen (Koch), who manages a children's camp, and Gary Lawrence, who works in construction.",
 		movies:[]
 }], 
-  		director: 8
+  		director: {
+	id:8, firstName: "Francis", lastName: "Lawrence", image: "", bio: "",
+		movies:[]
+}
 },
 {
 	id: 10, title: "Penguins of Madagascar", rating: 0, releaseDate: new Date(2014, 10, 26), 
@@ -142,7 +169,10 @@ movieFixtures = [
 	bio: "Most popular as Skipper of Madagascar movies & the TV show, Penguins Of Madagascar & was a voice actor for Shrek 3 as Gary, Monsters vs Aliens as Wilson, Megamind as Lord Scott, & a bit part in Puss In Boots as a bar thief as well as being a director, layout & storyboard artist for numerous others.",
 		movies:[]
 }], 
-  		director: 9
+  		director: {
+	id:9, firstName: "Eric", lastName: "Darnell", image: "", bio: "",
+		movies:[]
+}
 },
 {
 	id: 11, title: "The Hobbit: The Battle of Five Armies", rating: 0, releaseDate: new Date(2014, 11, 17), 
@@ -160,6 +190,9 @@ movieFixtures = [
 	bio: "Ian Murray McKellen was born on May 25, 1939 in Burnley, Lancashire, England, to Margery Lois (Sutcliffe) and Denis Murray McKellen, a civil engineer. He is of Scottish, Northern Irish, and English descent.",
 		movies:[]
 }], 
-  		director: 10
+  		director: {
+	id:10, firstName: "Peter", lastName: "Jackson", image: "", bio: "",
+		movies:[]
+}
 }
 ];
