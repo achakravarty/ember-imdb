@@ -70,8 +70,7 @@ $(document).ready(function(){
 			movie.summary = responseMovie.summary;
 			movie.releaseDate = new Date(responseMovie.releaseDate);
 			movie.rating = responseMovie.rating;
-			//movie.image = responseMovie.image;
-			movie.image = "http://www.cinemark.com/media/19383200/big.jpg";
+			movie.image = responseMovie.image;
 			var stars = $("<div/>");	
 			for (var i = 0; i < responseMovie.rating; i++) {
 				$(stars).append('<small class="glyphicon glyphicon-star text-primary"></small>');
@@ -103,17 +102,16 @@ $(document).ready(function(){
 	};
 
 	var categorize = function(){
-		console.log(allMovies);
 		var comingSoonMovies = $.grep(allMovies, function(movie){
 			return movie.releaseDate > new Date();
 		});
 		var trendingMovies = $.grep(allMovies, function(movie){
 			var today = new Date();
-			var twoMonthsAgo = new Date(today.getYear(), today.getMonth() - 2, today.getDate());
+			var twoMonthsAgo = new Date(today.getFullYear(), today.getMonth() - 2, today.getDate());
 			return movie.releaseDate > twoMonthsAgo && movie.releaseDate < today;
 		});
 		var topMovies = $.grep(allMovies, function(movie, index){
-			return movie.rating > 4 && movie.releaseDate < new Date();
+			return movie.rating > 8 && movie.releaseDate < new Date();
 		});
 		showComingSoonMovies(comingSoonMovies);
 		showTrendingMovies(trendingMovies);
@@ -130,7 +128,7 @@ $(document).ready(function(){
 			'<h4>' + movie.title + ' <small class="text-info">(' + movie.releaseDate.getFullYear() + ')</small></h4>' +
 			'</div>' +
 			'</div>';
-			$('#comingSoon').html(div);
+			$('#comingSoon').append(div);
 		});
 	};
 
@@ -172,7 +170,7 @@ $(document).ready(function(){
 			actors.append(
 				'<div class="media">' +
 				'<a class="pull-left">' +
-				'<img class="media-object" src="http://placehold.it/50x50">' +
+				'<img class="media-object" src="' + actor.image + '">' +
 				'</a>' +
 				'<div class="media-body">' +
 				'<div class="media-heading">' +
