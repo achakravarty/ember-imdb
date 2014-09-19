@@ -91,12 +91,14 @@ $(document).ready(function(){
 			var actor = new Actor();
 			actor.firstName = responseActor.firstName;
 			actor.lastName = responseActor.lastName;
+			actor.image = responseActor.image;
 			return actor;
 		},
 		directorTranslator : function(responseDirector){
 			var director = new Director();
 			director.firstName = responseDirector.firstName;
 			director.lastName = responseDirector.lastName;
+			director.image = responseDirector.image;
 			return director;
 		}
 	};
@@ -170,11 +172,11 @@ $(document).ready(function(){
 			actors.append(
 				'<div class="media">' +
 				'<a class="pull-left">' +
-				'<img class="media-object" src="' + actor.image + '">' +
+				'<img class="media-object" src="' + actor.image + '" style="height:50px; width:40px;">' +
 				'</a>' +
 				'<div class="media-body">' +
 				'<div class="media-heading">' +
-				'<a href="actor.html?actor=' + actor.id + '" class="">' + 
+				'<a href="#" class="">' + 
 				'<h4>' + actor.firstName + ' ' + actor.lastName + '</h4>' +
 				'</br>' +				
 				'</a>' +
