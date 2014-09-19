@@ -111,7 +111,7 @@
 						</div>
 						<div class="form-group">
 							<label for="release">Release Date</label>
-							{{view App.DateField type="date" class="form-control" id="release" placeholder="Movie Release Date" dateBinding="model.releaseDate"}}
+							{{view App.DateField type="date" class="form-control" id="release" dateBinding="model.releaseDate"}}
 						</div>
 						<div class="form-group">
 							<label for="summary">Summary</label>
@@ -123,7 +123,7 @@
 					</div>
 				</div>
 				{{else}}
-				<div class="col-md-5">
+				<div class="col-md-6">
 					<h2 class="page-header">{{model.title}}
 						<small class="text-muted">({{model.releaseYear}})</small>
 						<span class="pull-right">{{stars model.rating}}</span>
@@ -148,16 +148,16 @@
 					</div>
 				</div>
 				{{/if}}
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<div class="panel panel-info"> 
 						<div class="panel-heading">
 							<h4 class="panel-title">Cast</h4>
 						</div>
 						<div class="panel-body">
+							{{#each actor in model.actors}}
 							<div class="media">
-								{{#each actor in model.actors}}
 								{{#link-to 'actor' actor class="pull-left"}}
-								<img class="media-object" src="http://placehold.it/50x50"/>
+								<img class="media-object" {{bind-attr src=actor.image}} style="height: 50px; width:40px"/>
 								{{/link-to}}
 								<div class="media-body">
 									{{#link-to 'actor' actor}}
@@ -166,8 +166,8 @@
 									</div>									
 									{{/link-to}}
 								</div>								
-								{{/each}}
 							</div>
+							{{/each}}
 						</div>
 					</div>
 				</div>	
@@ -181,7 +181,7 @@
 			</div>
 			<div class="panel-body">
 				<div class="col-md-3">
-					<img {{bind-attr src=actor.image}} style="height:300px;width:200px"/>
+					<img {{bind-attr src=model.image}} style="height:300px;width:200px"/>
 				</div>
 				<div class="col-md-9">
 					<h2 class="page-header">{{model.fullName}}						

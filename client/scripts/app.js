@@ -62,13 +62,13 @@ App.IndexController = Ember.ArrayController.extend({
 	trendingMovies: function(){
 		return this.filter(function(movie){
 			var today = new Date();
-			var twoMonthsAgo = new Date(today.getYear(), today.getMonth() - 2, today.getDate());
+			var twoMonthsAgo = new Date(today.getFullYear(), today.getMonth() - 2, today.getDate());
 			return movie.get('releaseDate') > twoMonthsAgo && movie.get('releaseDate') < today;			
 		});
 	}.property('@each.releaseDate'),
 	topMovies: function(){
 		return this.filter(function(movie){
-			return movie.get('rating') > 4 && movie.get('releaseDate') < new Date();
+			return movie.get('rating') > 8 && movie.get('releaseDate') < new Date();
 		});
 	}.property('@each.releaseDate', '@each.rating')
 });
