@@ -1,5 +1,6 @@
 var express = require('express');
 var http = require('http');
+var cors = require('cors')
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
@@ -12,6 +13,7 @@ var actors = require('./routes/actor');
 var directors = require('./routes/director');
 
 var app = express();
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
 app.get('/movies', movies.list);
+app.put('/movies/:movie_id', movies.update);
 app.get('/movies/:movie_id', movies.get);
 app.get('/actors', actors.get);
 app.get('/actors/:actor_id', actors.get);
@@ -48,7 +51,7 @@ if (app.get('env') === 'development') {
         //     message: err.message,
         //     error: err
         // });
-    });
+});
 }
 
 // production error handler

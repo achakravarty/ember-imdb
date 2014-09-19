@@ -5,28 +5,35 @@ App.Router.map(function() {
 	this.resource("actor", { path: "/actor/:actor_id" });
 });
 
-App.Movie = Ember.Object.extend({
-	title: '',
-	summary: '',
-	releaseDate: '',
+DS.RESTAdapter.reopen({
+	host: 'http://localhost:3000'
+})
+
+var attr = DS.attr;
+
+App.Movie = DS.Model.extend({
+	title: attr('string'),
+	summary: attr('string'),
+	releaseDate: attr('date'),
 	releaseYear: function(){
 		return new Date(this.get('releaseDate')).getFullYear();
 	}.property('releaseDate'),
-	actors: [],
-	director: '',
-	rating: '',
-	image: '',
-	trailer: ''
+	actors: DS.hasMany('actor', {async: true}),
+	director: DS.belongsTo('director', {async: true}),
+	rating: attr('number'),
+	image: attr('string'),
+	trailer: attr('string')
 });
 
-App.Person = Ember.Object.extend({
-	firstName: '',
-	lastName: '',
-	bio: '',
-	image: '',
+App.Person = DS.Model.extend({
+	firstName: attr('string'),
+	lastName: attr('string'),
+	bio: attr('string'),
+	image: attr('string'),
 	fullName: function(){
 		return this.get('firstName') + " " + this.get('lastName');
-	}.property('firstName', 'lastName')
+	}.property('firstName', 'lastName'),
+	movies: DS.hasMany('movie', {async: true})
 });
 
 App.Actor = App.Person.extend({
@@ -39,48 +46,45 @@ App.Director = App.Person.extend({
 
 App.IndexRoute = Ember.Route.extend({
 	model: function() {
-		return Ember.$.getJSON('http://localhost:3000/movies').then(function(response){
-			var movies = [];
-			$.each(response.movies, function(index, movie){
-				movies.push(translators.movieTranslator(movie));
-			});
-			return Ember.A(movies);
-		});
+		return this.store.find('movie');
 	},
 	setupController: function(controller, movies){
-		controller.set('model', movies);
+		this.controller.set('model', movies);
 	}
 });
 
 App.IndexController = Ember.ArrayController.extend({
 	comingSoonMovies: function(){
 		return this.filter(function(movie){
-			return new Date(movie.releaseDate) > new Date();
+			return movie.get('releaseDate') > new Date();
 		});
 	}.property('@each.releaseDate'),
 	trendingMovies: function(){
 		return this.filter(function(movie){
 			var today = new Date();
 			var twoMonthsAgo = new Date(today.getFullYear(), today.getMonth() - 2, today.getDate());
+<<<<<<< HEAD
 			return new Date(movie.releaseDate) > twoMonthsAgo && new Date(movie.releaseDate) < today;
 			return new Date(movie.releaseDate) > new Date();
+=======
+			return movie.get('releaseDate') > twoMonthsAgo && movie.get('releaseDate') < today;			
+>>>>>>> ember-data
 		});
 	}.property('@each.releaseDate'),
 	topMovies: function(){
 		return this.filter(function(movie){
+<<<<<<< HEAD
 			return movie.rating > 8 && new Date(movie.releaseDate) < new Date();
+=======
+			return movie.get('rating') > 8 && movie.get('releaseDate') < new Date();
+>>>>>>> ember-data
 		});
 	}.property('@each.releaseDate', '@each.rating')
 });
 
 App.MovieRoute = Ember.Route.extend({
 	model: function(params){
-		return App.Movie.create({id: params.movie_id});
-	},
-	setupController: function(controller, movie){
-		Ember.$.getJSON('http://localhost:3000/movies/' + movie.get('id')).then(function(response){
-			controller.set('model', translators.movieTranslator(response.movie))
-		});		
+		return this.store.find('movie', params.movie_id);
 	},
 	actions:{
 		addToWatchList: function(movie){
@@ -88,10 +92,22 @@ App.MovieRoute = Ember.Route.extend({
 		},
 		removeFromWatchList: function(movie){
 			this.controller.set('model.isInWatchList', false);			
+<<<<<<< HEAD
+=======
+		},
+		edit: function(){
+			this.controller.set('isEditMode', true);
+		},
+		done: function(){
+			this.controller.set('isEditMode', false);
+			var movie = this.currentModel;
+			movie.save();
+>>>>>>> ember-data
 		}
 	}
 });
 
+<<<<<<< HEAD
 App.ActorRoute = Ember.Route.extend({
 	model: function(params){
 		return App.Actor.create({id: params.actor_id});
@@ -112,6 +128,15 @@ App.WatchlistRoute = Ember.Route.extend({
 			});
 			return Ember.A(movies);
 		});
+=======
+App.MovieController = Ember.ObjectController.extend({
+	isEditMode: false
+});
+
+App.ActorRoute = Ember.Route.extend({
+	model: function(params){
+		return this.store.find('actor', params.actor_id);
+>>>>>>> ember-data
 	}
 });
 
@@ -123,6 +148,7 @@ Ember.Handlebars.registerBoundHelper('stars', function(value, options) {
 	return new Handlebars.SafeString(stars.html());
 });
 
+<<<<<<< HEAD
 var translators = {
 	movieTranslator : function(responseMovie){
 		var that = this;
@@ -179,3 +205,21 @@ var translators = {
 		return director;
 	}
 };
+=======
+App.DateField = Ember.TextField.extend({
+  type: 'date',
+  date: function(key, date) {
+    if (date) {
+      this.set('value', date.toISOString().substring(0, 10));
+    } else {
+      value = this.get('value');
+      if (value) {
+        date = new Date(value);
+      } else {
+        date = null;
+      }
+    }
+    return date;
+  }.property('value')
+});
+>>>>>>> ember-data
